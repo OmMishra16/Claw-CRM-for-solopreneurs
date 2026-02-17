@@ -1,0 +1,12 @@
+# Canonical author identities for `git shortlog`, `git log` and `git blame`.
+#
+# Om Mishra has committed under two addresses; both are the same person.
+# Yash's commits carry his GitHub username rather than his name.
+#
+# NOTE: GitHub does not read this file. Its contributors graph still counts the
+# two addresses as separate people. To fix that, the second address must be
+# added to the same GitHub account under Settings -> Emails.
+
+Om Mishra <om.23bcs10191@ms.sst.scaler.com> <145644657+OmMishra16@users.noreply.github.com>
+Yash Agarwal <yashaga0204@gmail.com>
+Divyanshu Pandey <divyanshu1106@gmail.com>

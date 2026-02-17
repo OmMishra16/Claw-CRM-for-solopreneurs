@@ -1,0 +1,117 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.expo-shared/
+
+# Native builds (generated)
+/ios/
+/android/
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# Debug logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+logs/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+backend/.env
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+.nyc_output/
+
+# IDE & Editors
+.idea/
+.vscode/
+.claude/*
+!.claude/skills/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Build outputs
+build/
+*.ipa
+*.apk
+*.aab
+
+# Temporary files
+tmp/
+temp/
+.cache/
+*.tmp
+*.temp
+
+# EAS Build
+.eas/
+
+# Sentry
+.sentryclirc
+
+# Example/unused folders
+app-example/
+
+# Certificates
+*.pem
+*.cert
+*.crt
+
+# Secrets (just in case)
+secrets/
+credentials.json
+google-services.json
+GoogleService-Info.plist
+
+# Generated deck build artifacts
+docs/capstone/.deck-build/
+
+# Working artefacts and course-supplied material — not part of the submission.
+# Archived under _internal/ rather than deleted; see _internal/README.md.
+_internal/
+
+# Script outputs — regenerated on demand, so not tracked.
+# node scripts/triage.mjs  /  node scripts/review-copy.mjs
+docs/capstone/TRIAGE.md
+docs/capstone/Capstone_Final_Submission_for_review.md
