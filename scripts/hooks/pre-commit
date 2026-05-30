@@ -1,0 +1,34 @@
+#!/bin/sh
+# Runs the backend tests before each commit. Takes well under a second.
+#
+# Installed with:  git config core.hooksPath scripts/hooks
+# Bypass once with: git commit --no-verify
+#
+# This is a convenience, not the gate. CI is the gate — it runs on GitHub for
+# everyone and cannot be skipped.
+
+ROOT=$(git rev-parse --show-toplevel)
+
+# Only bother if backend code is part of this commit.
+if ! git diff --cached --name-only | grep -q '^backend/'; then
+  exit 0
+fi
+
+if [ ! -d "$ROOT/backend/node_modules" ]; then
+  echo "  skipping tests — backend dependencies not installed (cd backend && npm install)"
+  exit 0
+fi
+
+echo "  running backend tests…"
+if ! (cd "$ROOT/backend" && npm test --silent >/tmp/claw-precommit.log 2>&1); then
+  echo
+  echo "  Tests failed — commit stopped."
+  echo
+  tail -30 /tmp/claw-precommit.log | sed 's/^/    /'
+  echo
+  echo "  Fix them, or commit anyway with:  git commit --no-verify"
+  exit 1
+fi
+
+echo "  tests passed"
+exit 0

@@ -1,0 +1,72 @@
+name: CI
+
+# Runs on every push and pull request. Nothing here writes to the repository —
+# it only reports pass/fail, so it adds no commits to the history.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm ci
+
+      # No database or secrets needed: the suite covers pure scheduling logic.
+      - name: Run tests
+        working-directory: backend
+        run: npm test -- --ci
+
+      - name: Coverage summary
+        working-directory: backend
+        run: npx jest --coverage --collectCoverageFrom='src/lib/**/*.js' --ci
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Fails on errors; warnings are reported but tolerated.
+      - name: ESLint
+        run: npx expo lint
+
+  typecheck:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: tsc --noEmit
+        run: npx tsc --noEmit

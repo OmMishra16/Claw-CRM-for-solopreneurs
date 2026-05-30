@@ -1,0 +1,6 @@
+#!/bin/sh
+# Refresh the local triage board after every `git pull`.
+# Install once:  git config core.hooksPath scripts/hooks
+if command -v gh >/dev/null 2>&1 && command -v node >/dev/null 2>&1; then
+  node "$(git rev-parse --show-toplevel)/scripts/triage.mjs" 2>/dev/null || true
+fi
