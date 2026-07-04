@@ -1,0 +1,81 @@
+% ---- page geometry, 1 inch all round, page numbers bottom-centre ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---- headings: 14pt, bold, Times ----
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\fontsize{14}{17}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{13}{16}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{12}{15}\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{0pt}{8pt}
+\titlespacing*{\subsection}{0pt}{12pt plus 2pt minus 2pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{10pt plus 2pt minus 2pt}{5pt}
+
+% ---- start every top-level chapter on a fresh page ----
+\newif\iffirstsection\firstsectiontrue
+\newcommand{\sectionbreak}{\iffirstsection\firstsectionfalse\else\clearpage\fi}
+
+% ---- tables: allow page breaks, keep them readable ----
+\usepackage{longtable,booktabs,array}
+\renewcommand{\arraystretch}{1.2}
+
+% Tables inherit the document's 1.5 line spacing, which makes them tall enough to
+% split badly and strand single rows on their own page. Single-space inside them,
+% which is the usual convention for tabular matter anyway.
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\setstretch{1.0}}
+\AtBeginEnvironment{tabular}{\setstretch{1.0}}
+
+% ---- images never overflow the text block ----
+\usepackage{graphicx}
+\makeatletter
+\setkeys{Gin}{width=\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi,height=0.55\textheight,keepaspectratio}
+\makeatother
+\usepackage{float}
+\floatplacement{figure}{H}
+\makeatletter\def\fps@figure{H}\makeatother
+\usepackage[font=small,labelfont=bf,skip=6pt]{caption}
+
+% ---- avoid orphan/widow lines ----
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+
+% ---- glyph fallback: Termes lacks the rupee sign and some math symbols ----
+\usepackage{newunicodechar}
+\newfontfamily\glyphfallback{FreeSerif}
+\newunicodechar{₹}{{\glyphfallback ₹}}
+\newunicodechar{≠}{{\glyphfallback ≠}}
+\newunicodechar{≤}{{\glyphfallback ≤}}
+\newunicodechar{≥}{{\glyphfallback ≥}}
+\newunicodechar{⇒}{{\glyphfallback ⇒}}
+
+% ---- justification and long unbreakable strings ----
+% File paths set in \texttt (backend/src/routes/appointments.js) carry no break
+% points and push past the right margin. Allow hyphenation inside typewriter
+% text, let microtype tighten justification, and give TeX extra room to stretch
+% a stubborn line rather than overflow it.
+\usepackage[htt]{hyphenat}
+\usepackage{microtype}
+% xurl lets long URLs in the reference list break across lines
+\usepackage{xurl}
+\setlength{\emergencystretch}{3.5em}
+\tolerance=1200
+\hbadness=1200
+
+% ---- long lines inside code blocks ----
+% Verbatim does not wrap, so a long pseudocode line runs into the margin.
+% fvextra teaches pandoc's Highlighting environment to break lines.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{%
+  breaklines,breakanywhere,commandchars=\\\{\}}
+% the pseudocode listings are plain verbatim, not highlighted, so wrap those too
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere,fontsize=\small}
+
+% brand accent used on the title page rules
+\usepackage{xcolor}
+\definecolor{clawaccent}{HTML}{4B3FC4}
