@@ -1,6 +1,6 @@
 # Claw
 
-[**Watch Demo Video**](https://youtu.be/wPcF_HNjneQ)
+[**Watch Demo Video**](https://drive.google.com/file/d/1m0GnKWsEB2v62Yfvt-0nliO3UThxiylF/view?usp=sharing)
 
 **A mobile-first command center for solo practitioners. A CRM for solopreneurs.**
 

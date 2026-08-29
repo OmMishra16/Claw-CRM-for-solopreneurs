@@ -111,7 +111,6 @@ docs/capstone/.deck-build/
 # Archived under _internal/ rather than deleted; see _internal/README.md.
 _internal/
 
-# Script outputs — regenerated on demand, so not tracked.
-# node scripts/triage.mjs  /  node scripts/review-copy.mjs
-docs/capstone/TRIAGE.md
-docs/capstone/Capstone_Final_Submission_for_review.md
+# Project documentation and capstone deliverables — submitted through the course
+# portal rather than through the repository, so not tracked here.
+docs/
